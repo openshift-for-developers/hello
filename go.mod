@@ -1,3 +1,3 @@
-module github.com/florianmoss/hello
+module github.com/openshift-for-developers/hello
 
-go 1.11
+go 1.16
