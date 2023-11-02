@@ -17,10 +17,19 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		response = "Welcome to the Red Hat summit connect!"
 	}
 
+	// Get the auto-refresh interval from the environment variable (default to 3 seconds if not set).
+	refreshIntervalStr := os.Getenv("REFRESH_INTERVAL")
+	refreshInterval := 3
+	if len(refreshIntervalStr) > 0 {
+		refreshInterval, _ = strconv.Atoi(refreshIntervalStr)
+	}
+
 	tmpl := `
 	<!DOCTYPE html>
 	<html>
 	<head>
+		{{if .AutoRefresh}}
+		<meta http-equiv="refresh" content="{{.RefreshInterval}}">
 		<style>
 			.container {
 				display: flex;
