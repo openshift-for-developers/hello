@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"html/template"
 	"os"
 )
 
@@ -12,7 +13,45 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 		response = "Welcome to the Red Hat summit!"
 	}
 
-	fmt.Fprintln(w, response)
+	tmpl := `
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<style>
+			.container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<img src="openshift.jpg" alt="OpenShift" style="max-width: 100%; max-height: 50%;">
+			<h1>{{.Response}}</h1>
+		</div>
+	</body>
+	</html>
+	`
+
+	t, err := template.New("webpage").Parse(tmpl)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	data := struct {
+		Response string
+	}{
+		Response: response,
+	}
+
+	err = t.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 	fmt.Println("Servicing an impatient beginner's request.")
 }
 
@@ -34,3 +73,4 @@ func main() {
 
 	select {}
 }
+
