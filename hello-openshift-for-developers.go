@@ -5,7 +5,11 @@ import (
 	"net/http"
 	"html/template"
 	"os"
+        "embed"
 )
+
+//go:embed static/*
+var content embed.FS
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	response := os.Getenv("RESPONSE")
@@ -29,7 +33,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 	</head>
 	<body>
 		<div class="container">
-			<img src="openshift.jpg" alt="OpenShift" style="max-width: 100%; max-height: 50%;">
+			<img src="/static/openshift.jpg" alt="OpenShift" style="max-width: 100%; max-height: 50%;">
 			<h1>{{.Response}}</h1>
 		</div>
 	</body>
