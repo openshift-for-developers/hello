@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
         "embed"
+        "strconv"
 )
 
 //go:embed static/*
