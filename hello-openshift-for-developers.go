@@ -14,7 +14,7 @@ var content embed.FS
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	response := os.Getenv("RESPONSE")
 	if len(response) == 0 {
-		response = "Welcome to the Red Hat summit connect!"
+		response = "I love Red Hat socks!"
 	}
 
 	tmpl := `
