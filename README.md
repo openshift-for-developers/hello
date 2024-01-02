@@ -13,4 +13,4 @@ Note: this example app is derived from the [example at sclorg/golang-ex](https:/
 
 The response message can be set by using the RESPONSE environment
 variable.  You will need to edit the pod definition and add an
-environment variable to the container definition and run the new pod.
+environment variable to the container definition and run the new pod..
