@@ -14,14 +14,13 @@ var content embed.FS
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	response := os.Getenv("RESPONSE")
 	if len(response) == 0 {
-		response = "I love Red Hat socks!"
+		response = "I love Application Platforms!"
 	}
 
 	tmpl := `
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<meta http-equiv="refresh" content="3">
 		<style>
 			.container {
 				display: flex;
